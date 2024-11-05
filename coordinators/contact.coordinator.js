@@ -1,6 +1,7 @@
 // coordinators/contact.coordinator.js
 import nodemailer from 'nodemailer';
 import emailTemplate from '../utils/emailTemplate.util.js';
+import config from 'config';
 
 export default class ContactCoordinator {
     static async handleEmailRequest(formData, file) {
@@ -15,21 +16,19 @@ export default class ContactCoordinator {
             } else {
                 console.log("No file attached with the request.");
             }
-            console.log(process.env.EMAIL_USER);
-            console.log(process.env.EMAIL_PASS);
             // Set up transporter
             const transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                    user: process.env.EMAIL_USER, // "jacobaengel55@gmail.com"
-                    pass: process.env.EMAIL_PASS  // Your Gmail app password
+                    user: config.get('EMAIL_USER'), // "jacobaengel55@gmail.com"
+                    pass: config.get('EMAIL_PASS')  // Your Gmail app password
                 }
             });
             
             const mailOptions = {
-                from: '"Faamo Support" <faamo@crittercodes.dev>', // Custom From name and email
-                replyTo: 'faamo@crittercodes.dev',  // Replies can go here
-                to: process.env.RECIPIENT_EMAIL,   // Destination email
+                from: '"Pholio" <contact@pholio.ink>', // Custom From name and email
+                replyTo: 'inquiry@pholio.ink',  // Replies can go here
+                to: config.get('RECIPIENT_EMAIL'),   // Destination email
                 subject: 'New Tattoo Inquiry from ' + client_name,
                 html: emailTemplate({ client_name, client_email, client_phone, client_message, referenceFile: file }),
                 attachments: file ? [{ filename: file.originalname, content: file.buffer }] : []

@@ -1,26 +1,19 @@
 import express from 'express';
 import cors from 'cors';
+import config from 'config';
 //import { db } from './lib/database.js';
 import ContactRoute from './routes/contact.route.js';
 import dotenv from 'dotenv';
 import BookingRoute from './routes/booking.route.js';
+import { auth } from './middleware/auth.middleware.js';
+
 
 
 const app = express();
-app.use(cors({
-    origin: 'http://localhost:3000', // Replace with your frontend URL in production
-    methods: 'POST'
-}));
+app.use(cors(config.get('cors')));
 
 app.use(express.json());
 
-
-const config = {
-  url: process.env.MONGO_URL,
-  database: process.env.DB,
-  minPoolSize: 3,
-  maxPoolSize: 10,
-};
 
 //db.init(config);
 

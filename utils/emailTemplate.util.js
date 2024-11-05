@@ -23,7 +23,7 @@ export default function emailTemplate(data) {
     <body>
         <div class="container">
             <h2>New Tattoo Inquiry Received</h2>
-            <p>Hello Austin,</p>
+            <p>Hello Monty,</p>
             <p>You have a new tattoo inquiry from <span class="highlight">${data.client_name}</span>. Here are the details:</p>
             <div class="details">
                 <p><strong>Name:</strong> ${data.client_name}</p>
@@ -34,7 +34,7 @@ export default function emailTemplate(data) {
             <blockquote>${data.client_message}</blockquote>
             ${data.referenceFile ? `<p class="reference-file">Reference File: A file has been attached to this inquiry.</p>` : ''}
             <p style="margin-top: 20px;">You can reach out to <span class="highlight">${data.client_name}</span> via email or phone to discuss further details.</p>
-            <div class="footer">Best,<br> CritterCodes</div>
+            <div class="footer">Best,<br> The Pholio Team</div>
         </div>
     </body>
     </html>
